@@ -1,3 +1,6 @@
+queries:
+    exclude: "unity/*"
+    include: "unity/Assets/Scripts/*"
 extraction:
   csharp:
     index:
