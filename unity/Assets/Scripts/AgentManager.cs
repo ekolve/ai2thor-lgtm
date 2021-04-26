@@ -20,6 +20,7 @@ using UnityEngine.Networking;
 public class AgentManager : MonoBehaviour {
     public List<BaseFPSAgentController> agents = new List<BaseFPSAgentController>();
     protected int frameCounter;
+    protected int frameCounter2;
     protected bool serverSideScreenshot;
     protected string robosimsClientToken = "";
     protected int robosimsPort = 8200;
