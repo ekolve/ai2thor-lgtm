@@ -1,8 +1,9 @@
-queries:
-    exclude: "unity/*"
-    include: "unity/Assets/Scripts/*"
 extraction:
   csharp:
     index:
       buildless: true
       nuget_restore: false
+        filters:
+            - exclude: "unity/**.cs"
+            - include: "unity/Assets/Scripts/**.cs"
+
