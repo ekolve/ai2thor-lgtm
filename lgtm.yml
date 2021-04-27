@@ -7,3 +7,8 @@ extraction:
         - exclude: "unity/**.cs"
         - include: "unity/Assets/Scripts/**.cs"
 
+path_classifiers:
+  library:
+    - unity/Assets/**/*.cs
+    - exclude: unity/Assets/Scripts/*.cs
+    - exclude: unity/Assets/Scripts/**/*.cs
