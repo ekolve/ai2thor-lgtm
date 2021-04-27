@@ -3,9 +3,6 @@ extraction:
     index:
       buildless: true
       nuget_restore: false
-      filters:
-        - exclude: "unity/**.cs"
-        - include: "unity/Assets/Scripts/**.cs"
 
 path_classifiers:
   library:
