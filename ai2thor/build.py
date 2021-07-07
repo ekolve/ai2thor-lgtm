@@ -3,6 +3,8 @@ import os
 import requests
 import json
 from ai2thor.util import makedirs
+import time
+import random
 import ai2thor.downloader
 import zipfile
 import logging
@@ -19,8 +21,7 @@ PYPI_S3_BUCKET = "ai2-thor-pypi"
 
 COMMIT_ID = None
 try:
-    import ai2thor._builds
-    COMMIT_ID = ai2thor._builds.COMMIT_ID
+    from ai2thor._builds import COMMIT_ID
 except ImportError:
     pass
 

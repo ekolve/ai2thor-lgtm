@@ -1,4 +1,5 @@
 import os
+import time
 import msgpack
 import numpy as np
 import requests
@@ -7,6 +8,7 @@ from pprint import pprint
 import shutil
 import copy
 
+from ai2thor._quality_settings import QUALITY_SETTINGS, DEFAULT_QUALITY
 from ai2thor.server import Event, MultiAgentEvent, DepthFormat
 from ai2thor.interact import InteractiveControllerPrompt, DefaultActions
 
@@ -72,6 +74,8 @@ class Controller(object):
         # pprint(response_payload)
 
     def reset(self, scene_name=None):
+        if not scene_name.endswith("_physics"):
+            scene_name = scene_name + "_physics"
         self.sequence_id = 0
         # response_payload = self._post_event(
         #     'reset', dict(action='Reset', sceneName=scene_name, sequenceId=self.sequence_id)
@@ -163,6 +167,7 @@ class Controller(object):
 
     def _post_event(self, route="", data=None):
         r = requests.post(self._get_url(route), json=data)
+        s = time.time()
         pprint('ACTION "{}"'.format(data["action"]))
         pprint("POST")
         # pprint(r.content)
@@ -177,6 +182,7 @@ class Controller(object):
     @staticmethod
     def _display_step_event(event):
         metadata = event.metadata
+        image = event.frame
         pprint(metadata)
         cv2.imshow("aoeu", event.cv2img)
         cv2.waitKey(1000)

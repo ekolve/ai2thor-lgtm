@@ -8,6 +8,7 @@ import getpass
 import ai2thor.controller
 import ai2thor.fifo_server
 import uuid
+import uuid
 import cv2
 from tasks import _local_build_path
 
@@ -17,6 +18,7 @@ parser = argparse.ArgumentParser(description="Thor Arm Tester")
 parser.add_argument("--record-video", action="store_true")
 args = parser.parse_args()
 
+from pprint import pprint
 
 controller = ai2thor.controller.Controller(
     #        port=8200, start_unity=False,
@@ -121,7 +123,7 @@ def standard_pose():
 
 
 def execute_actions(actions, **kwargs):
-
+    frames = []
     for a in actions:
         if a == {} or a == {"action": ""}:
             continue
@@ -132,13 +134,13 @@ def execute_actions(actions, **kwargs):
         print("success: %s" % controller.last_event.metadata["lastActionSuccess"])
         print("return: %s" % controller.last_event.metadata["actionReturn"])
         print(
-            "position: %s" % (controller.last_event.metadata["arm"]["handSphereCenter"])
+            "position: %s" % (controller.last_event.metadata["arm"]["HandSphereCenter"])
         )
         for j in controller.last_event.metadata["arm"]["joints"]:
             rot = " ".join(map(lambda x: str(j["rotation"][x]), ["x", "y", "z", "w"]))
             print("%s %s" % (j["name"], rot))
             # print("%s %s" % (j['name'], j['position']))
-        print(controller.last_event.metadata["arm"]["pickupableObjects"])
+        print(controller.last_event.metadata["arm"]["PickupableObjects"])
         # frames.append(controller.last_event.cv2img)
 
 
